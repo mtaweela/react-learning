@@ -5,12 +5,9 @@ import {
 } from 'react-router-dom';
 
 // components 
-import Header from './components/headerComponent/header';
 import HomePage from './components/pages/homePage';
-import Products from './components/pages/products';
 
 // includes
-import './assets/css/default.min.css'
 
 class App extends Component {
   render() {
@@ -18,9 +15,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header/>
           <Route exact path='/' component={HomePage}/>
-          <Route exact path='/Products' component={Products}/>
         </div>
       </Router>
     );
