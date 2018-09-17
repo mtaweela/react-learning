@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import Title from './title';
 
 class HomePage extends Component {
-  constructor() {
-    super();
+  handleChange(e) {
+    const title = e.target.value;
+    this.props.changeTitle(title);
   }
 
   render() {
-    console.log(this.props);
     return (
-        <div className="container-fluid">
-            {this.title}
-        </div>
+      <div className="container-fluid">
+        <Title title={this.props.title}/>
+        <input value={this.props.title} onChange={this.handleChange.bind(this)}/>
+      </div>
     );
   }
 }
