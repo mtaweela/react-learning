@@ -10,14 +10,19 @@ import HomePage from './components/pages/homePage';
 // includes
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {name: "will"};
+  }
+
   render() {
-    const title = "welcome newbie";
+    setTimeout(() => {
+      this.setState({name:"Bob"})
+    },1000)
     return (
-      <Router>
         <div className="App">
-          <Route exact path='/' component={HomePage}/>
+          {this.state.name}
         </div>
-      </Router>
     );
   }
 }
