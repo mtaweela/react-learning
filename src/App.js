@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 
 // components 
 import Layout from './components/pages/layout';
@@ -13,15 +16,17 @@ import Settings from './components/pages/settings';
 class App extends Component {
   render() {
     return (
-      <Router history={hashHistory}>
-        <Route path="/" component={Layout}>
-          <IndexRoute component={Feautered}></IndexRoute>
-          <Route path="archives(/:article)" name="archives" component={Archives}></Route>
-          <Route path="settings" name="settings" component={Settings}></Route>
-        </Route>
+      <Router>
+        <div className="App">
+            <Route exact path='/' component={Layout}/>
+            <Route exact path='/feautered' component={Feautered}/>
+            <Route exact path='/archives' component={Archives}/>
+            <Route exact path='/settings' component={Settings}/>
+        </div>
       </Router>
     );
   }
 }
 
 export default App;
+
