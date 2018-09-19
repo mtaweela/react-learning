@@ -7,17 +7,24 @@ import todostore from '../stores/todoStore';
 class Todos extends Component {
 constructor () {
   super();
+  this.getTodos = this.getTodos.bind(this);
   this.state = {
     todos: todostore.getAll()
   };
 }
 
   componentWillMount() {
-    todostore.on("change", () => {
-      this.setState({
-        todos: todostore.getAll()
-      })
-    })
+    todostore.on("change", this.getTodos);
+  }
+
+  componentWillUnmount() {
+    todostore.removeListener("change", this.getTodos);
+  }
+
+  getTodos() {
+    this.setState({
+      todos: todostore.getAll()
+    });
   }
 
   reloadTodos() {
