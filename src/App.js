@@ -4,12 +4,8 @@ import {
   Route
 } from 'react-router-dom';
 
-// components 
-import Layout from './components/pages/layout';
-import Feautered from './components/pages/feautered';
-import Archives from './components/pages/archives';
-import Settings from './components/pages/settings';
-
+// Pages
+import Todos from './pages/todos';
 
 // includes
 
@@ -18,10 +14,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-            <Route exact path='/' component={Layout}/>
-            <Route exact path='/feautered' component={Feautered}/>
-            <Route   path='/archives/:article?' component={Archives}/>
-            <Route exact path='/settings' component={Settings}/>
+          <Route exact path='/' component={Todos}/>
         </div>
       </Router>
     );
