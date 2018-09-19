@@ -12,6 +12,14 @@ constructor () {
   };
 }
 
+  componentWillMount() {
+    todostore.on("change", () => {
+      this.setState({
+        todos: todostore.getAll()
+      })
+    })
+  }
+
   render() {
     const {todos} = this.state;
     const todosComponents = todos.map(todo => {
