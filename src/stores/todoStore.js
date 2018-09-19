@@ -6,12 +6,12 @@ constructor () {
     super();
     this.todos = [
         {
-          id: 1,
+          _id: 1,
           text:"go shopping",
           complete: true
         },
         {
-          id: 2,
+          _id: 2,
           text:"do not go shopping",
           complete: false
         }
@@ -36,7 +36,15 @@ constructor () {
         switch(action.type) {
             case "CREATE_TODO": {
                 this.createTodo(action.text);
+                break
             }
+            case "RECEIVE_TODOS": {
+                this.todos = action.todos;
+                this.emit("change");
+                break
+            }
+            default:
+                console.log("this action is not supported");
         }
     }
 }

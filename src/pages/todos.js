@@ -20,18 +20,18 @@ constructor () {
     })
   }
 
-  createTodo() {
-    todoActions.createTodo(Date.now());
+  reloadTodos() {
+    todoActions.reloadTodos();
   }
 
   render() {
     const {todos} = this.state;
     const todosComponents = todos.map(todo => {
-      return <Todo key={todo.id} {...todo}/>
+      return <Todo key={todo._id} {...todo}/>
     })
     return (
       <div className="container-fluid">
-        <button onClick={this.createTodo.bind(this)}>Create!</button>
+        <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
         <h1>Todos</h1>
         <ul>{todosComponents}</ul>
       </div>
