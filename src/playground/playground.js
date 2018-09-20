@@ -31,3 +31,4 @@ var f = {name: "will", things: [0,1,2]};
 var g = Object.assign({}, f, {name: "Fred"});
 g.things = f.things.concat(3);
 console.log(f, g)
+
