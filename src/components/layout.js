@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-let Layout = () => {
-    return null;
+@connect()
+export default class Layout extends React.Component {
+    render() {
+        return null;
+    }
 }
-
-Layout = connect()(Layout);
-
-export default Layout
