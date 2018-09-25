@@ -1,44 +1,47 @@
 import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+import axios from "axios";
+const initialState = {
+    fetching: false,
+    fetched: false,
+    users: [],
+    error: null
+}
 
 // reducer
-const reducer = function(state, action) {
-    if (action.type === "INC") {
-        return state + action.payload;
-    } else if (action.type === "DEC") {
-        return state - action.payload;
-    }else if (action.type === "E") {
-        throw new Error("AHHHH!!!");
+const reducer = function(state=initialState, action) {
+    switch (action.type) {
+        case "FETCH_USER_START" : {
+            return {...state, fetching: true};
+            break;
+        }
+        case "FETCH_USER_ERROR" : {
+            return {...state, fetching: false, error: action.payload};
+            break;
+        }
+        case "RECIEVE_USERS" : {
+            return {...state, fetching: false, fetched: true, users: action.payload};
+            break;
+        }
     }
 
     return state;
 };
 
-
 // middlewares
-const logger = (store) => (next) => (action) => {
-    console.log("action fired", action);
-    next(action);
-}
-
-const error = (store) => (next) => (action) => {
-    try{
-        next(action);
-    } catch (e) {
-        console.log("AHHHHH!!", e);
-    }
-}
-
-const middleware = applyMiddleware(logger, error);
+const middleware = applyMiddleware( thunk, logger);
 
 // store
-const store = createStore(reducer, 0, middleware);
+const store = createStore(reducer, middleware);
 
-store.subscribe(() => {
-    console.log("store changed", store.getState())
+store.dispatch((dispatch) => {
+    dispatch({type: "FETCH_USER_START"});
+    axios.get("http://rest.learncode.academy/api/mohamed/users")
+        .then((res) => {
+            dispatch({type: "RECIEVE_USERS", payload: res.data});
+        })
+        .catch((err) => {
+            dispatch({type: "FETCH_USERS_ERROR", payload: err});
+        });
 });
-
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "INC", payload: 222});
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "DEC", payload: 3});
-store.dispatch({type: "E"});
