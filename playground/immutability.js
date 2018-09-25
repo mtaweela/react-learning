@@ -16,7 +16,7 @@
 /** create new object */
 // var a = {name: "will", age: 35};
 // var b = Object.assign({}, a, {name: "Fred"});
-// console.log(b, a);
+// console.log(b, a);   
 
 /** create new array */
 // var c = [1,2,3];
@@ -26,7 +26,9 @@
 // var e = c.filter(val => val !== 2);
 // console.log(c, e);
 
-/** object has data and array */
+/** object has data and array 
+ * to add staff to an array use ==> concat, filter, map(change all items in an array and returns a new one), reduce
+*/
 var f = {name: "will", things: [0,1,2]};
 var g = Object.assign({}, f, {name: "Fred"});
 g.things = f.things.concat(3);
